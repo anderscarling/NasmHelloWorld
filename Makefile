@@ -1,3 +1,4 @@
+NASM64       = /usr/local/bin/nasm
 NASM         = /usr/local/bin/nasm
 LD           = ld
 
@@ -5,18 +6,23 @@ NASM64_FLAGS = -f macho64
 NASM_FLAGS   = -f macho
 LD_FLAGS     = -macosx_version_min 10.7.0 -lSystem
 
-all: hello_world.bin hello_world64.bin
+BINARIES     = $(basename $(wildcard *.asm))
+BINARIES64   = $(basename $(wildcard *64.asm))
+BINARIES32   = $(filter-out $(BINARIES64),$(BINARIES))
 
-hello_world.o:
-	$(NASM) $(NASM_FLAGS) hello_world.asm
-hello_world.bin: hello_world.o
-	$(LD) $(LD_FLAGS) hello_world.o -o hello_world.bin
+.PHONY: all
+all: $(addsuffix .bin, $(BINARIES))
 
-hello_world64.o:
-	$(NASM) $(NASM64_FLAGS) hello_world64.asm
-hello_world64.bin: hello_world64.o
-	$(LD) $(LD_FLAGS) hello_world64.o -o hello_world64.bin
-
+.PHONY: clean
 clean:
-	rm -f *.o
-	rm -f *.bin
+	rm -f $(addsuffix .bin, $(BINARIES))
+	rm -f $(addsuffix .o,   $(BINARIES))
+
+$(addsuffix .o, $(BINARIES64)): %.o: %.asm
+	$(NASM64) $(NASM64_FLAGS) $<
+
+$(addsuffix .o, $(BINARIES32)): %.o: %.asm
+	$(NASM) $(NASM_FLAGS) $<
+
+$(addsuffix .bin, $(BINARIES)): %.bin:   %.o
+	$(LD) $(LD_FLAGS) $< -o $@
