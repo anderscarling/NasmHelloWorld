@@ -3,13 +3,13 @@ msg:    db    "Hello World!", 0x0a
 len:    equ   $-msg
 
     SECTION .text
-    global main
+    global start
 
 kernel:
     int 0x80
     ret
 
-main:
+start:
     mov eax, 4         ; SYS_write
     push dword len
     push dword msg

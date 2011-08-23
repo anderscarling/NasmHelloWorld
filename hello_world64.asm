@@ -3,13 +3,13 @@ msg:    db    "Hello World!", 0x0a
 len:    equ   $-msg
 
     SECTION .text
-    global main
+    global start
 
 kernel:
     syscall
     ret
 
-main:
+start:
     mov rax, 0x2000004   ; SYS_write
     mov rdi, 1
     mov rsi, msg
