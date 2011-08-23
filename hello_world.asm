@@ -16,7 +16,7 @@ start:
     push dword 1       ; stdout
     call kernel
     add esp, 12
-    
+
     push dword 0
-    mov eax, 1
+    mov eax, 1         ; SYS_exit
     call kernel

@@ -11,11 +11,11 @@ kernel:
 
 start:
     mov rax, 0x2000004   ; SYS_write
-    mov rdi, 1
+    mov rdi, 1           ; stdout
     mov rsi, msg
     mov rdx, len
     call kernel
-    
-    mov rax, 0x2000001
+
+    mov rax, 0x2000001   ; SYS_exit
     mov rdi, 0
     call kernel
