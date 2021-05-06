@@ -12,7 +12,7 @@ kernel:
 start:
     mov rax, 0x2000004   ; SYS_write
     mov rdi, 1           ; stdout
-    mov rsi, [rel msg]
+    lea rsi, [rel msg]
     mov rdx, len
     call kernel
 
