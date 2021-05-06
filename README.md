@@ -1,11 +1,9 @@
-# Hello World in NASM assembly for OS X (32 & 64 bit)
+# Hello World in NASM assembly for macOS (for 64 bit intel)
 
 I won't promise this is done "the right way" (tm), I've never really
 used assembly but wanted to play around with it some.
-Everything seems to work under OS X Lion.
 
-To assemble the 64 bit version you'll need to build your own nasm (use
-homebrew).
+It seems to work under macOS Big Sur.
 
 ## Thanks
 These, among other sources, where helpful:
