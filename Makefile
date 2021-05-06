@@ -2,7 +2,7 @@ NASM64       = /usr/local/bin/nasm
 LD           = ld
 
 NASM64_FLAGS = -f macho64
-LD_FLAGS     = -macosx_version_min 10.7.0 -lSystem
+LD_FLAGS     = -static
 
 BINARIES     = $(basename $(wildcard *.asm))
 BINARIES64   = $(basename $(wildcard *64.asm))
